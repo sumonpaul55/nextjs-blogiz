@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/shared/Header";
 import Footer from "@/components/shared/Footer";
 import Providers from "@/lib/Providers";
+import { Toaster } from "sonner";
 
 const roboto = Roboto({
   weight: "400",
@@ -24,6 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <Providers>
+      <Toaster />
       <html lang="en" data-theme="light">
         <body className={roboto.className}>
           <Header />

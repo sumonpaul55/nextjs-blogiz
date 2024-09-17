@@ -2,6 +2,7 @@
 
 import { createBlog } from "@/actions/createBlog";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export type FormValues = {
   id: string;
@@ -28,7 +29,11 @@ const CreateBlogForm = () => {
 
     try {
       const res = await createBlog(data)
-      console.log(res)
+      if (res) {
+        toast.success("Post Created successfully")
+      } else {
+        toast.error("something went wrong")
+      }
     } catch (error: any) {
       console.log(error?.message)
       throw new Error(error.message)

@@ -15,7 +15,7 @@ export const generateStaticParams = async () => {
 
 
 const page = async ({ params }: TBlogId) => {
-    const res = await fetch(`http://localhost:5000/blogs/${params.blogId}`, {
+    const res = await fetch(`http://localhost:5000/blogs/${params?.blogId}`, {
         cache: "no-store"
     })
     const data = await res.json()
