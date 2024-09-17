@@ -1,12 +1,15 @@
+"use client"
 import BlogCard from '@/components/ui/BlogCard';
+import { useGetBlogsQuery } from '@/redux/api/blogApi/blogApi';
 import { TBlogs } from '@/types';
 import React from 'react'
 
-const page = async () => {
-    const res = await fetch("http://localhost:5000/blogs", {
-        cache: "no-store"
-    });
-    const blogs = await res.json()
+const BlogPage = () => {
+    // const res = await fetch("http://localhost:5000/blogs", {
+    //     cache: "no-store"
+    // });
+    // const blogs = await res.json()
+    const { data: blogs, isError, isLoading, error } = useGetBlogsQuery({})
     return (
         <section className='mt-10 px-4 md:px-10'>
             <div className="container mx-auto">
@@ -14,7 +17,7 @@ const page = async () => {
                 <p className='text-center mt-4 md:text-lg text-gray-600'><i>Dive into the fascinating world of quantum computing, where unlocking unprecedented computational power.</i></p>
             </div>
             <div className='mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5'>
-                {
+                {blogs?.length < 1 ? <h2>Loading...</h2> :
                     blogs?.map((blog: TBlogs) => (
                         <BlogCard blog={blog} key={blog.id} />
                     ))
@@ -24,4 +27,4 @@ const page = async () => {
     )
 }
 
-export default page
+export default BlogPage
